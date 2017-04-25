@@ -1,0 +1,1745 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for node-npmtest-cluster-master/node_modules/cluster-master/cluster-master.js</title>
+    <meta charset="utf-8">
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Arial, Helvetica;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            height: 160px;
+            padding: 0 1em 0 1em;
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 170px;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Menlo, Monaco, Consolas, Courier New, monospace;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { color: #000; }
+        div.coverage-summary a:visited { color: #333; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1 style="font-weight: bold;">
+        <a href="https://github.com/npmtest/node-npmtest-cluster-master">npmtest-cluster-master (v0.0.1)</a>
+    </h1>
+    <h1>Code coverage report for <span class="entity">node-npmtest-cluster-master/node_modules/cluster-master/cluster-master.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">10.47% <small>(29 / 277)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">1.64% <small>(2 / 122)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">0% <small>(0 / 51)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">11.24% <small>(29 / 258)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../index.html">All files</a> &#187; <a href="index.html">node-npmtest-cluster-master/node_modules/cluster-master/</a> &#187; cluster-master.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// Set up a cluster and set up resizing and such.
+&nbsp;
+var cluster = require("cluster")
+, quitting = false
+, restarting = false
+, path = require("path")
+, clusterSize = 0
+, env
+, os = require("os")
+, onmessage
+, repl = require('repl')
+, replAddressPath = process.env.CLUSTER_MASTER_REPL || 'cluster-master-socket'
+, net = require('net')
+, fs = require('fs')
+, util = require('util')
+, minRestartAge = 2000
+, danger = false
+&nbsp;
+exports = module.exports = clusterMaster
+exports.restart = restart
+exports.resize = resize
+exports.quitHard = quitHard
+exports.quit = quit
+&nbsp;
+var debugStreams = {}
+<span class="fstat-no" title="function not covered" >function debug () {</span>
+<span class="cstat-no" title="statement not covered" >  console.error.apply(console, arguments)</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  var msg = util.format.apply(util, arguments)</span>
+<span class="cstat-no" title="statement not covered" >  Object.keys(debugStreams).forEach(<span class="fstat-no" title="function not covered" >function (s) {</span></span>
+<span class="cstat-no" title="statement not covered" >    try {</span>
+      // if the write fails, just remove it.
+<span class="cstat-no" title="statement not covered" >      debugStreams[s].write(msg + '\n')</span>
+<span class="cstat-no" title="statement not covered" >      if (debugStreams[s].repl) <span class="cstat-no" title="statement not covered" >debugStreams[s].repl.displayPrompt()</span></span>
+    } catch (e) {
+<span class="cstat-no" title="statement not covered" >      delete debugStreams[s]</span>
+    }
+  })
+}
+&nbsp;
+&nbsp;
+<span class="fstat-no" title="function not covered" >function clusterMaster (config) {</span>
+<span class="cstat-no" title="statement not covered" >  if (typeof config === "string") <span class="cstat-no" title="statement not covered" >config = { exec: config }</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (!config.exec) {</span>
+<span class="cstat-no" title="statement not covered" >    throw new Error("Must define a 'exec' script")</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (!cluster.isMaster) {</span>
+<span class="cstat-no" title="statement not covered" >    throw new Error("ClusterMaster answers to no one!\n"+</span>
+                    "(don't run in a cluster worker script)")
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (cluster._clusterMaster) {</span>
+<span class="cstat-no" title="statement not covered" >    throw new Error("This cluster has a master already")</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  cluster._clusterMaster = module.exports</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (typeof config.repl !== 'undefined') <span class="cstat-no" title="statement not covered" >replAddressPath = config.repl </span></span> // allow null and false
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  onmessage = config.onMessage || config.onmessage</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  clusterSize = config.size || os.cpus().length</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  minRestartAge = config.minRestartAge || minRestartAge</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  env = config.env</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  var masterConf = { exec: path.resolve(config.exec) }</span>
+<span class="cstat-no" title="statement not covered" >  if (config.silent) <span class="cstat-no" title="statement not covered" >masterConf.silent = true</span></span>
+<span class="cstat-no" title="statement not covered" >  if (config.env) <span class="cstat-no" title="statement not covered" >masterConf.env = config.env</span></span>
+<span class="cstat-no" title="statement not covered" >  if (config.args) <span class="cstat-no" title="statement not covered" >masterConf.args = config.args</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  cluster.setupMaster(masterConf)</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (config.signals !== false) {</span>
+    // sighup/sigint listeners
+<span class="cstat-no" title="statement not covered" >    setupSignals()</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  forkListener()</span>
+&nbsp;
+  // now make it the right size
+<span class="cstat-no" title="statement not covered" >  debug((replAddressPath) ? 'resize and then setup repl' : 'resize')</span>
+<span class="cstat-no" title="statement not covered" >  resize(setupRepl)</span>
+}
+&nbsp;
+<span class="fstat-no" title="function not covered" >function select (field) {</span>
+<span class="cstat-no" title="statement not covered" >  return Object.keys(cluster.workers).map(<span class="fstat-no" title="function not covered" >function (k) {</span></span>
+<span class="cstat-no" title="statement not covered" >    return [k, cluster.workers[k][field]]</span>
+  }).reduce(<span class="fstat-no" title="function not covered" >function (set, kv) {</span>
+<span class="cstat-no" title="statement not covered" >    set[kv[0]] = kv[1]</span>
+<span class="cstat-no" title="statement not covered" >    return set</span>
+  }, {})
+}
+&nbsp;
+<span class="fstat-no" title="function not covered" >function setupRepl () {</span>
+<span class="cstat-no" title="statement not covered" >  if (!replAddressPath) <span class="cstat-no" title="statement not covered" >return </span></span> // was disabled
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  debug('setup repl')</span>
+<span class="cstat-no" title="statement not covered" >  var socket = null</span>
+<span class="cstat-no" title="statement not covered" >  var socketAddress = undefined</span>
+<span class="cstat-no" title="statement not covered" >  if (typeof replAddressPath === 'string') {</span>
+<span class="cstat-no" title="statement not covered" >    socket = path.resolve(replAddressPath)</span>
+  } else <span class="cstat-no" title="statement not covered" >if (typeof replAddressPath === 'number') {</span>
+<span class="cstat-no" title="statement not covered" >    socket = replAddressPath</span>
+<span class="cstat-no" title="statement not covered" >    if (!isNaN(socket)) <span class="cstat-no" title="statement not covered" >socket = +socket</span></span>
+  } else <span class="cstat-no" title="statement not covered" >if (replAddressPath.address &amp;&amp; replAddressPath.port) {</span>
+<span class="cstat-no" title="statement not covered" >    socket = replAddressPath.port</span>
+<span class="cstat-no" title="statement not covered" >    socketAddress = replAddressPath.address</span>
+  }
+<span class="cstat-no" title="statement not covered" >  var connections = 0</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (typeof socket === 'string') {</span>
+<span class="cstat-no" title="statement not covered" >    fs.unlink(socket, <span class="fstat-no" title="function not covered" >function (er) {</span></span>
+<span class="cstat-no" title="statement not covered" >      if (er &amp;&amp; er.code !== 'ENOENT') <span class="cstat-no" title="statement not covered" >throw er</span></span>
+<span class="cstat-no" title="statement not covered" >      startRepl()</span>
+    })
+  } else {
+<span class="cstat-no" title="statement not covered" >    startRepl()</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  function startRepl () {</span>
+<span class="cstat-no" title="statement not covered" >    console.error('starting repl on '+socket+'=')</span>
+<span class="cstat-no" title="statement not covered" >    process.on('exit', <span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >      try { <span class="cstat-no" title="statement not covered" >fs.unlinkSync(socket) }</span> catch (er) {}</span>
+    })
+<span class="cstat-no" title="statement not covered" >    var sockId = 0</span>
+<span class="cstat-no" title="statement not covered" >    var replServer = net.createServer(<span class="fstat-no" title="function not covered" >function (sock) {</span></span>
+<span class="cstat-no" title="statement not covered" >      connections ++</span>
+<span class="cstat-no" title="statement not covered" >      replEnded = false</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      sock.id = sockId ++</span>
+<span class="cstat-no" title="statement not covered" >      debugStreams['repl-' + sockId] = sock</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      sock.write('Starting repl #' + sock.id)</span>
+<span class="cstat-no" title="statement not covered" >      var r = repl.start({</span>
+        prompt: 'ClusterMaster (`help` for cmds) ' + process.pid + ' ' + sock.id + '&gt; ',
+        input: sock,
+        output: sock,
+        terminal: true,
+        useGlobal: false,
+        ignoreUndefined: true
+      })
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      var helpCommands = [</span>
+        'help        - display these commands',
+        'repl        - access the REPL',
+        'resize(n)   - resize the cluster to `n` workers',
+        'restart(cb) - gracefully restart workers, cb is optional',
+        'stop()      - gracefully stop workers and master',
+        'kill()      - forcefully kill workers and master',
+        'cluster     - node.js cluster module',
+        'size        - current cluster size',
+        'connections - number of REPL connections to master',
+        'workers     - current workers',
+        'select(fld) - map of id to field (from workers)',
+        'pids        - map of id to pids',
+        'ages        - map of id to worker ages',
+        'states      - map of id to worker states',
+        'debug(a1)   - output `a1` to stdout and all REPLs',
+        'sock        - this REPL socket',
+        '.exit       - close this connection to the REPL'
+      ]
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      var context = {</span>
+        help: helpCommands,
+        repl: r,
+        resize: resize,
+        restart: restart,
+        stop: quit,
+        kill: quitHard,
+        cluster: cluster,
+        get size <span class="fstat-no" title="function not covered" >() {</span>
+<span class="cstat-no" title="statement not covered" >          return clusterSize</span>
+        },
+        get connections <span class="fstat-no" title="function not covered" >() {</span>
+<span class="cstat-no" title="statement not covered" >          return connections</span>
+        },
+        get workers <span class="fstat-no" title="function not covered" >() {</span>
+<span class="cstat-no" title="statement not covered" >          var p = select('pid')</span>
+<span class="cstat-no" title="statement not covered" >          var s = select('state')</span>
+<span class="cstat-no" title="statement not covered" >          var a = select('age')</span>
+<span class="cstat-no" title="statement not covered" >          return Object.keys(cluster.workers).map(<span class="fstat-no" title="function not covered" >function (k) {</span></span>
+<span class="cstat-no" title="statement not covered" >            return new Worker({ id: k, pid: p[k], state: s[k], age: a[k] })</span>
+          })
+        },
+        select: select,
+        get pids <span class="fstat-no" title="function not covered" >() {</span>
+<span class="cstat-no" title="statement not covered" >          return select('pid')</span>
+        },
+        get ages <span class="fstat-no" title="function not covered" >() {</span>
+<span class="cstat-no" title="statement not covered" >          return select('age')</span>
+        },
+        get states <span class="fstat-no" title="function not covered" >() {</span>
+<span class="cstat-no" title="statement not covered" >          return select('state')</span>
+        },
+        // like 'wall'
+        debug: debug,
+        sock: sock
+      }
+<span class="cstat-no" title="statement not covered" >      var desc = Object.getOwnPropertyNames(context).map(<span class="fstat-no" title="function not covered" >function (n) {</span></span>
+<span class="cstat-no" title="statement not covered" >        return [n, Object.getOwnPropertyDescriptor(context, n)]</span>
+      }).reduce(<span class="fstat-no" title="function not covered" >function (set, kv) {</span>
+<span class="cstat-no" title="statement not covered" >        set[kv[0]] = kv[1]</span>
+<span class="cstat-no" title="statement not covered" >        return set</span>
+      }, {})
+<span class="cstat-no" title="statement not covered" >      Object.defineProperties(r.context, desc)</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      sock.repl = r</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      r.on('end', <span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >        connections --</span>
+<span class="cstat-no" title="statement not covered" >        replEnded = true</span>
+<span class="cstat-no" title="statement not covered" >        if (!ended) <span class="cstat-no" title="statement not covered" >sock.end()</span></span>
+      })
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      sock.on('end', end)</span>
+<span class="cstat-no" title="statement not covered" >      sock.on('close', end)</span>
+<span class="cstat-no" title="statement not covered" >      sock.on('error', end)</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      ended = false</span>
+<span class="fstat-no" title="function not covered" >      function end () {</span>
+<span class="cstat-no" title="statement not covered" >        if (ended) <span class="cstat-no" title="statement not covered" >return</span></span>
+<span class="cstat-no" title="statement not covered" >        ended = true</span>
+<span class="cstat-no" title="statement not covered" >        if (!replEnded) <span class="cstat-no" title="statement not covered" >r.rli.close()</span></span>
+<span class="cstat-no" title="statement not covered" >        delete debugStreams['repl-' + sockId]</span>
+      }
+&nbsp;
+    })
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (socketAddress) {</span>
+<span class="cstat-no" title="statement not covered" >      replServer.listen(socket, socketAddress, <span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >        debug('ClusterMaster repl listening on '+socketAddress+':'+socket)</span>
+      })
+    } else {
+<span class="cstat-no" title="statement not covered" >      replServer.listen(socket,  <span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >        debug('ClusterMaster repl listening on '+socket)</span>
+      })
+    }
+  }
+}
+&nbsp;
+<span class="fstat-no" title="function not covered" >function Worker (d) {</span>
+<span class="cstat-no" title="statement not covered" >  this.id = d.id</span>
+<span class="cstat-no" title="statement not covered" >  this.pid = d.pid</span>
+<span class="cstat-no" title="statement not covered" >  this.state = d.state</span>
+<span class="cstat-no" title="statement not covered" >  this.age = d.age</span>
+}
+&nbsp;
+Worker.prototype.disconnect = <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >  cluster.workers[this.id].disconnect()</span>
+}
+&nbsp;
+Worker.prototype.kill = <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >  process.kill(this.pid)</span>
+}
+&nbsp;
+&nbsp;
+<span class="fstat-no" title="function not covered" >function forkListener () {</span>
+<span class="cstat-no" title="statement not covered" >  cluster.on("fork", <span class="fstat-no" title="function not covered" >function (worker) {</span></span>
+<span class="cstat-no" title="statement not covered" >    worker.birth = Date.now()</span>
+<span class="cstat-no" title="statement not covered" >    Object.defineProperty(worker, 'age', { get: <span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >      return Date.now() - this.birth</span>
+    }, enumerable: true, configurable: true })
+<span class="cstat-no" title="statement not covered" >    worker.pid = worker.process.pid</span>
+<span class="cstat-no" title="statement not covered" >    var id = worker.id</span>
+<span class="cstat-no" title="statement not covered" >    debug("Worker %j setting up", id)</span>
+<span class="cstat-no" title="statement not covered" >    if (onmessage) <span class="cstat-no" title="statement not covered" >worker.on("message", onmessage)</span></span>
+<span class="cstat-no" title="statement not covered" >    var disconnectTimer</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    worker.on("exit", <span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >      clearTimeout(disconnectTimer)</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      if (!worker.suicide) {</span>
+<span class="cstat-no" title="statement not covered" >        debug("Worker %j exited abnormally", id)</span>
+        // don't respawn right away if it's a very fast failure.
+        // otherwise server crashes are hard to detect from monitors.
+<span class="cstat-no" title="statement not covered" >        if (worker.age &lt; minRestartAge) {</span>
+<span class="cstat-no" title="statement not covered" >          debug("Worker %j died too quickly, danger", id)</span>
+<span class="cstat-no" title="statement not covered" >          danger = true</span>
+          // still try again in a few seconds, though.
+<span class="cstat-no" title="statement not covered" >          setTimeout(resize, 2000)</span>
+<span class="cstat-no" title="statement not covered" >          return</span>
+        }
+      } else {
+<span class="cstat-no" title="statement not covered" >        debug("Worker %j exited", id)</span>
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      if (Object.keys(cluster.workers).length &lt; clusterSize &amp;&amp; !resizing) {</span>
+<span class="cstat-no" title="statement not covered" >        resize()</span>
+      }
+    })
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    worker.on("disconnect", <span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >      debug("Worker %j disconnect", id)</span>
+      // give it 1 second to shut down gracefully, or kill
+<span class="cstat-no" title="statement not covered" >      disconnectTimer = setTimeout(<span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >        debug("Worker %j, forcefully killing", id)</span>
+<span class="cstat-no" title="statement not covered" >        worker.process.kill("SIGKILL")</span>
+      }, 5000)
+    })
+  })
+}
+&nbsp;
+<span class="fstat-no" title="function not covered" >function restart (cb) {</span>
+<span class="cstat-no" title="statement not covered" >  if (restarting) {</span>
+<span class="cstat-no" title="statement not covered" >    debug("Already restarting.  Cannot restart yet.")</span>
+<span class="cstat-no" title="statement not covered" >    return</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  restarting = true</span>
+&nbsp;
+  // graceful restart.
+  // all the existing workers get killed, and this
+  // causes new ones to be spawned.  If there aren't
+  // already the intended number, then fork new extras.
+<span class="cstat-no" title="statement not covered" >  var current = Object.keys(cluster.workers)</span>
+  , length = current.length
+  , reqs = clusterSize - length
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  var i = 0</span>
+&nbsp;
+  // if we're resizing, then just kill off a few.
+<span class="cstat-no" title="statement not covered" >  if (reqs !== 0) {</span>
+<span class="cstat-no" title="statement not covered" >    debug('resize %d -&gt; %d, change = %d',</span>
+                  current.length, clusterSize, reqs)
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return resize(clusterSize, <span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >      debug('resize cb')</span>
+<span class="cstat-no" title="statement not covered" >      length = clusterSize</span>
+<span class="cstat-no" title="statement not covered" >      graceful()</span>
+    })
+  }
+&nbsp;
+  // all the current workers, kill and then wait for a
+  // new one to spawn before moving on.
+<span class="cstat-no" title="statement not covered" >  graceful()</span>
+<span class="fstat-no" title="function not covered" >  function graceful () {</span>
+<span class="cstat-no" title="statement not covered" >    debug("graceful %d of %d", i, length)</span>
+<span class="cstat-no" title="statement not covered" >    if (i &gt;= current.length) {</span>
+<span class="cstat-no" title="statement not covered" >      debug("graceful completion")</span>
+<span class="cstat-no" title="statement not covered" >      restarting = false</span>
+<span class="cstat-no" title="statement not covered" >      return cb &amp;&amp; cb()</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    var first = (i === 0)</span>
+    , id = current[i++]
+    , worker = cluster.workers[id]
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (quitting) {</span>
+<span class="cstat-no" title="statement not covered" >      if (worker &amp;&amp; worker.process.connected) {</span>
+<span class="cstat-no" title="statement not covered" >        worker.disconnect()</span>
+      }
+<span class="cstat-no" title="statement not covered" >      return graceful()</span>
+    }
+&nbsp;
+    // start a new one. if it lives for 2 seconds, kill the worker.
+<span class="cstat-no" title="statement not covered" >    if (first) {</span>
+<span class="cstat-no" title="statement not covered" >      cluster.once('listening', <span class="fstat-no" title="function not covered" >function (newbie) {</span></span>
+<span class="cstat-no" title="statement not covered" >        var timer = setTimeout(<span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >          newbie.removeListener('exit', skeptic)</span>
+<span class="cstat-no" title="statement not covered" >          if (worker &amp;&amp; worker.process.connected) {</span>
+<span class="cstat-no" title="statement not covered" >            worker.disconnect()</span>
+          }
+<span class="cstat-no" title="statement not covered" >          graceful()</span>
+        }, 2000)
+<span class="cstat-no" title="statement not covered" >        newbie.on('exit', skeptic)</span>
+<span class="fstat-no" title="function not covered" >        function skeptic () {</span>
+<span class="cstat-no" title="statement not covered" >          debug('New worker died quickly. Aborting restart.')</span>
+<span class="cstat-no" title="statement not covered" >          restarting = false</span>
+<span class="cstat-no" title="statement not covered" >          clearTimeout(timer)</span>
+        }
+      })
+    } else {
+<span class="cstat-no" title="statement not covered" >      cluster.once('listening', <span class="fstat-no" title="function not covered" >function (newbie) {</span></span>
+<span class="cstat-no" title="statement not covered" >        if (worker &amp;&amp; worker.process.connected) {</span>
+<span class="cstat-no" title="statement not covered" >          worker.disconnect()</span>
+        }
+      })
+<span class="cstat-no" title="statement not covered" >      graceful()</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    cluster.fork(env)</span>
+  }
+}
+&nbsp;
+&nbsp;
+&nbsp;
+var resizing = false
+var resizeCbs = []
+<span class="fstat-no" title="function not covered" >function resize (n, cb_) {</span>
+<span class="cstat-no" title="statement not covered" >  if (typeof n === 'function') <span class="cstat-no" title="statement not covered" >cb_ = n, n = clusterSize</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (cb_)</span>
+<span class="cstat-no" title="statement not covered" >    resizeCbs.push(cb_)</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (resizing)</span>
+<span class="cstat-no" title="statement not covered" >    return</span>
+&nbsp;
+<span class="fstat-no" title="function not covered" >  function cb() {</span>
+<span class="cstat-no" title="statement not covered" >    console.error('done resizing')</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    resizing = false</span>
+<span class="cstat-no" title="statement not covered" >    var q = resizeCbs.slice(0)</span>
+<span class="cstat-no" title="statement not covered" >    resizeCbs.length = 0</span>
+<span class="cstat-no" title="statement not covered" >    q.forEach(<span class="fstat-no" title="function not covered" >function(c) {</span></span>
+<span class="cstat-no" title="statement not covered" >      c()</span>
+    })
+<span class="cstat-no" title="statement not covered" >    if (clusterSize !== Object.keys(cluster.workers).length) {</span>
+<span class="cstat-no" title="statement not covered" >      if (danger &amp;&amp; clusterSize === 0) {</span>
+<span class="cstat-no" title="statement not covered" >        debug('DANGER! something bad has happened')</span>
+<span class="cstat-no" title="statement not covered" >        process.exit(1)</span>
+      } else {
+<span class="cstat-no" title="statement not covered" >        danger = true</span>
+<span class="cstat-no" title="statement not covered" >        debug('DANGER! wrong number of workers')</span>
+<span class="cstat-no" title="statement not covered" >        setTimeout(resize, 1000)</span>
+      }
+    } else {
+<span class="cstat-no" title="statement not covered" >      danger = false</span>
+    }
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (n &gt;= 0) <span class="cstat-no" title="statement not covered" >clusterSize = n</span></span>
+<span class="cstat-no" title="statement not covered" >  var current = Object.keys(cluster.workers)</span>
+  , c = current.length
+  , req = clusterSize - c
+&nbsp;
+  // avoid angry "listening" listeners
+<span class="cstat-no" title="statement not covered" >  cluster.setMaxListeners(clusterSize * 2)</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (c === clusterSize) {</span>
+<span class="cstat-no" title="statement not covered" >    resizing = false</span>
+<span class="cstat-no" title="statement not covered" >    return cb()</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  var thenCnt = 0</span>
+<span class="fstat-no" title="function not covered" >  function then () {</span>
+<span class="cstat-no" title="statement not covered" >    thenCnt ++</span>
+<span class="cstat-no" title="statement not covered" >    return then2</span>
+  }
+<span class="fstat-no" title="function not covered" >  function then2 () {</span>
+<span class="cstat-no" title="statement not covered" >    if (--thenCnt === 0) {</span>
+<span class="cstat-no" title="statement not covered" >      resizing = false</span>
+<span class="cstat-no" title="statement not covered" >      return cb()</span>
+    }
+  }
+&nbsp;
+  // make us have the right number of them.
+<span class="cstat-no" title="statement not covered" >  if (req &gt; 0) <span class="cstat-no" title="statement not covered" >while (req -- &gt; 0) {</span></span>
+<span class="cstat-no" title="statement not covered" >    debug('resizing up', req)</span>
+<span class="cstat-no" title="statement not covered" >    cluster.once('listening', then())</span>
+<span class="cstat-no" title="statement not covered" >    cluster.fork(env)</span>
+  } else <span class="cstat-no" title="statement not covered" >for (var i = clusterSize; i &lt; c; i ++) {</span>
+<span class="cstat-no" title="statement not covered" >    var worker = cluster.workers[current[i]]</span>
+<span class="cstat-no" title="statement not covered" >    debug('resizing down', current[i])</span>
+<span class="cstat-no" title="statement not covered" >    worker.once('exit', then())</span>
+<span class="cstat-no" title="statement not covered" >    if (worker &amp;&amp; worker.process.connected) {</span>
+<span class="cstat-no" title="statement not covered" >      worker.disconnect()</span>
+    }
+  }
+}
+&nbsp;
+&nbsp;
+&nbsp;
+<span class="fstat-no" title="function not covered" >function quitHard () {</span>
+<span class="cstat-no" title="statement not covered" >  quitting = true</span>
+<span class="cstat-no" title="statement not covered" >  quit()</span>
+}
+&nbsp;
+&nbsp;
+&nbsp;
+<span class="fstat-no" title="function not covered" >function quit () {</span>
+<span class="cstat-no" title="statement not covered" >  if (quitting) {</span>
+<span class="cstat-no" title="statement not covered" >    debug("Forceful shutdown")</span>
+    // last ditch effort to force-kill all workers.
+<span class="cstat-no" title="statement not covered" >    Object.keys(cluster.workers).forEach(<span class="fstat-no" title="function not covered" >function (id) {</span></span>
+<span class="cstat-no" title="statement not covered" >      var w = cluster.workers[id]</span>
+<span class="cstat-no" title="statement not covered" >      if (w &amp;&amp; w.process) <span class="cstat-no" title="statement not covered" >w.process.kill("SIGKILL")</span></span>
+    })
+<span class="cstat-no" title="statement not covered" >    process.exit(1)</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  debug("Graceful shutdown...")</span>
+<span class="cstat-no" title="statement not covered" >  clusterSize = 0</span>
+<span class="cstat-no" title="statement not covered" >  quitting = true</span>
+<span class="cstat-no" title="statement not covered" >  restart(<span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >    debug("Graceful shutdown successful")</span>
+<span class="cstat-no" title="statement not covered" >    process.exit(0)</span>
+  })
+}
+&nbsp;
+&nbsp;
+<span class="fstat-no" title="function not covered" >function setupSignals () {</span>
+<span class="cstat-no" title="statement not covered" >  try {</span>
+<span class="cstat-no" title="statement not covered" >    process.on("SIGHUP", restart)</span>
+<span class="cstat-no" title="statement not covered" >    process.on("SIGINT", quit)</span>
+  } catch (e) {
+    // Must be on Windows, waaa-waaah.
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  process.on("exit", <span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >    if (!quitting) <span class="cstat-no" title="statement not covered" >quitHard()</span></span>
+  })
+}
+&nbsp;
+&nbsp;</pre></td></tr>
+</table></pre>
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Tue Apr 25 2017 13:49:34 GMT+0000 (UTC)</div>
+</div>
+</body>
+</html>
